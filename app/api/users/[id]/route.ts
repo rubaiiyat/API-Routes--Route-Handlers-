@@ -32,3 +32,21 @@ export async function PATCH(
     return Response.json(updateUser);
   }
 }
+
+// Delete User by ID
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const { id } = await params;
+  const userIndex = data.findIndex((user) => user.id === parseInt(id));
+
+  if (userIndex === -1) {
+    return new Response("User not found", { status: 404 });
+  } else {
+    const deleteUser = data[userIndex];
+    data.splice(userIndex, 1);
+    return Response.json({ message: "User has been deleted", deleteUser });
+  }
+}
